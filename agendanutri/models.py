@@ -29,3 +29,4 @@ class Agenda(models.Model):
     def criacao(self):
         self.data_criacao = timezone.now()
         self.save()
+        return self.id_paciente
