@@ -1,5 +1,5 @@
 from django import forms
-from .models import Agenda
+from .models import Agenda, Paciente
 
 
 class AgendaForm(forms.ModelForm):
@@ -10,4 +10,11 @@ class AgendaForm(forms.ModelForm):
         widgets = {
             'data_consulta': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
+
+class PacienteForm(forms.ModelForm):
+
+    class Meta:
+        model = Paciente
+        fields = ('nome', 'cpf',)
+        
 
