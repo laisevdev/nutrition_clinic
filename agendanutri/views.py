@@ -2,13 +2,25 @@ from django.shortcuts import render, redirect
 from .forms import AgendaForm, PacienteForm
 from .models import Agenda
 from .models import Paciente
+from django.utils import timezone
 
 def index(request):
     return render(request, 'agendanutri/index.html', {})
 
 def cadastrar(request):
-    form = PacienteForm()
+    if request.method == "POST":
+        form = PacienteForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            return redirect('sucesso_cadastro',)
+    else:
+        form = PacienteForm()
     return render(request, 'agendanutri/cadastro_pacientes.html', {'form': form})
+    
+def sucesso_cadastro(request):
+    return render(request, 'agendanutri/sucesso_cadastro.html', {})
 
 def marcar_consulta(request):        
     if request.method == "POST":
