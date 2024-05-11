@@ -1,0 +1,19 @@
+{% extends 'agendanutri/base.html' %}
+
+{% block content %}
+
+<main>
+    <div>
+        <h1> Seja Bem vindo ao AppNutri </h1>
+        <h2> Agende abaixo </h2>
+    </div>
+
+    <div>
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-secondary">Marcar Consulta</button>
+        </form>
+    </div>
+</main>
+
+{% endblock %}

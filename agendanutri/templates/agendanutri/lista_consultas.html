@@ -1,0 +1,16 @@
+{% extends 'agendanutri/base.html' %}
+
+{% block content %}
+
+        {% for consulta in consultas %}
+            <main>  
+                <h1>
+                    Sua consulta foi Marcada com sucesso para a seguinte data abaixo: 
+                </h1>              
+                <h2>Data Consulta: {{ consulta.data_consulta }}</h2>
+                <p>Marcado em:{{ consulta.data_criacao }}</p>
+                
+            </main>
+        {% endfor %}
+
+{% endblock %}
