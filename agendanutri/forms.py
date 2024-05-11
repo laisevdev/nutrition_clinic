@@ -1,8 +1,13 @@
 from django import forms
 from .models import Agenda
 
-class PostForm(forms.ModelForm):
+
+class AgendaForm(forms.ModelForm):
 
     class Meta:
         model = Agenda
-        fields = ('id_paciente', 'data_consulta', 'data_criacao',)
+        fields = ('data_consulta', 'id_paciente',)
+        widgets = {
+            'data_consulta': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
+
