@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
-from .forms import AgendaForm
+from .forms import AgendaForm, PacienteForm
 from .models import Agenda
+from .models import Paciente
 
 def index(request):
     return render(request, 'agendanutri/index.html', {})
+
+def cadastrar(request):
+    form = PacienteForm()
+    return render(request, 'agendanutri/cadastro_pacientes.html', {'form': form})
 
 def marcar_consulta(request):        
     if request.method == "POST":
