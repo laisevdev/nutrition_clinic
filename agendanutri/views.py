@@ -7,6 +7,10 @@ from django.utils import timezone
 def index(request):
     return render(request, 'agendanutri/index.html', {})
 
+def exibir_lista_pacientes(request):
+    pacientes = Paciente.objects.all()
+    return render(request, 'agendanutri/lista_pacientes.html', {'pacientes': pacientes})
+
 def cadastrar(request):
     if request.method == "POST":
         form = PacienteForm(request.POST)
