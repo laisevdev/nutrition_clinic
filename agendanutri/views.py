@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AgendaForm, PacienteForm
 from .models import Agenda
 from .models import Paciente
@@ -6,10 +6,6 @@ from django.utils import timezone
 
 def index(request):
     return render(request, 'agendanutri/index.html', {})
-
-def exibir_lista_pacientes(request):
-    pacientes = Paciente.objects.all()
-    return render(request, 'agendanutri/lista_pacientes.html', {'pacientes': pacientes})
 
 def cadastrar(request):
     if request.method == "POST":
@@ -25,6 +21,27 @@ def cadastrar(request):
     
 def sucesso_cadastro(request):
     return render(request, 'agendanutri/sucesso_cadastro.html', {})
+
+def exibir_lista_pacientes(request):
+    pacientes = Paciente.objects.all()
+    return render(request, 'agendanutri/lista_pacientes.html', {'pacientes': pacientes})
+
+def dados_paciente(request, pk):
+    dados_do_paciente = get_object_or_404(Paciente, pk=pk)
+    return render(request, 'agendanutri/dados_paciente.html', {'dados_do_paciente': dados_do_paciente})
+
+def editar_pacientes(request, pk):
+    paciente = get_object_or_404(Paciente, pk=pk)
+    if request.method == "POST":
+        form = PacienteForm(request.POST, instance=paciente)
+        if form.is_valid():
+            paciente = form.save(commit=False)
+            paciente.author = request.user
+            paciente.save()
+            return redirect('dados_paciente', pk=paciente.pk)
+    else:
+        form = PacienteForm(instance=paciente)
+    return render(request, 'agendanutri/editar_pacientes.html', {'form': form}) 
 
 def marcar_consulta(request):        
     if request.method == "POST":
