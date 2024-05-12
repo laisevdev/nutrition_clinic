@@ -10,5 +10,15 @@
             <p>PESO: {{ dados_do_paciente.peso }}</p> 
             <p>ALTURA: {{ dados_do_paciente.altura }}</p>          
         </main>
-   
+        <div>
+            <h6>Editar Paciente</h6>
+            <a class="btn btn-secondary" href="{% url 'editar_pacientes' pk=dados_do_paciente.pk %}">
+                {% include './icons/pencil-fill.svg' %}
+            </a>
+            <br> 
+            <h6>Apagar Paciente</h6>
+            <a class="btn btn-secondary" href="{% url 'editar_pacientes' pk=dados_do_paciente.pk %}">
+                {% include './icons/svg-lixeira.svg' %}
+            </a>
+        </div>
 {% endblock %}
