@@ -1,0 +1,14 @@
+{% extends 'agendanutri/base.html' %}
+
+{% block content %}
+
+        <main class="lista_pacientes">             
+            <h2>Nome: {{ dados_do_paciente.nome }}</h2>
+            <p>CPF: {{ dados_do_paciente.cpf }}</p>  
+            <p>SEXO: {{ dados_do_paciente.sexo }}</p> 
+            <p>ENDEREÇO: {{ dados_do_paciente.endereco }}</p> 
+            <p>PESO: {{ dados_do_paciente.peso }}</p> 
+            <p>ALTURA: {{ dados_do_paciente.altura }}</p>          
+        </main>
+   
+{% endblock %}
