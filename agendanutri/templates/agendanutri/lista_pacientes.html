@@ -1,0 +1,22 @@
+{% extends 'agendanutri/base.html' %}
+
+{% block content %}
+
+    <header>        
+        <h1>
+            Pacientes appNutri: 
+        </h1> 
+        <br>
+        <h1>Para exibir maiores detalhes dos pacientes, basta clicar em cima do nome!
+        </h1>
+        <br>
+    </header>
+    {% for paciente in pacientes %}
+        <main class="lista_pacientes">  
+            <h3>
+            <a href="{% url 'dados_paciente' pk=paciente.pk %}">Nome: {{ paciente.nome }}</a>
+            </h3>
+            
+        </main>
+        {% endfor %}
+{% endblock %}
