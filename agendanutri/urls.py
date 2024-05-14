@@ -9,6 +9,7 @@ urlpatterns = [
     path('agendanutri/dadospaciente/<int:pk>/', views.dados_paciente, name='dados_paciente'),
     path('agendanutri/<int:pk>/editarpaciente/', views.editar_pacientes, name='editar_pacientes'),
     path('agendanutri/deletarpaciente/<int:pk>/', views.deletar_pacientes, name='paciente_deletado'),
+    path('agendanutri/excluidocomsucesso/', views.sucesso_exclusao, name='sucesso_exclusao'),
     path('agendanutri/marcar/', views.marcar_consulta, name='marcar_consulta'),
     path('agendanutri/agendamentos/', views.lista_consultas, name='lista_consultas'),
 ]
