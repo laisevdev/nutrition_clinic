@@ -1,0 +1,11 @@
+{% extends 'agendanutri/base.html' %}
+
+{% block content %}
+    <h2>Têm certeza que deseja excluir o Paciente?</h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+        <button type="submit" class="save btn btn-secondary">Sim</button>
+        <a class="btn btn-secondary" href="{% url 'lista_pacientes' %}">
+            Cancelar
+        </a>
+    </form>
+{% endblock %}
