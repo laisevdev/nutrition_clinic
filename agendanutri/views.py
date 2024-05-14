@@ -46,9 +46,12 @@ def deletar_pacientes(request, pk):
     paciente = get_object_or_404(Paciente, pk=pk)
     if request.method == "POST":
         paciente.delete()
-        return redirect('paciente_deletado', pk=pk)
+        return redirect('sucesso_exclusao',)
     else:
         return render(request, 'agendanutri/paciente_deletado.html', {}) 
+
+def sucesso_exclusao(request):
+    return render(request, 'agendanutri/sucesso_exclusao.html', {})
 
 def marcar_consulta(request):        
     if request.method == "POST":
