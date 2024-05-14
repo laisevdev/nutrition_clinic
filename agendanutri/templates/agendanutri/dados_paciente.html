@@ -17,7 +17,7 @@
             </a>
             <br> 
             <h6>Apagar Paciente</h6>
-            <a class="btn btn-secondary" href="{% url 'editar_pacientes' pk=dados_do_paciente.pk %}">
+            <a class="btn btn-secondary" href="{% url 'paciente_deletado'  pk=dados_do_paciente.pk %}">
                 {% include './icons/svg-lixeira.svg' %}
             </a>
         </div>
