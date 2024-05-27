@@ -19,7 +19,7 @@ class AgendaForm(forms.ModelForm):
 
     class Meta:
         model = Agenda
-        fields = ('data_consulta', 'id_paciente',)
+        fields = ('data_consulta', 'id_paciente', 'horario_consulta',)
         widgets = {
             'data_consulta': forms.DateInput(attrs={'type': 'date'}),
         }
