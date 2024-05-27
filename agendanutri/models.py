@@ -20,9 +20,10 @@ class Paciente(models.Model):
         return self.nome
   
 class Agenda(models.Model):
-    data_consulta = models.DateTimeField()
-    data_retorno = models.DateTimeField(auto_now = False, auto_now_add = False, null=True, blank=True)
-    data_reagendamento = models.DateTimeField(auto_now = False, auto_now_add = False, null=True, blank=True)
+    data_consulta = models.DateField(null=True, blank=True)
+    horario_consulta = models.TimeField(null=True, blank=True)
+    #data_retorno = models.DateTimeField(auto_now = False, auto_now_add = False, null=True, blank=True)
+    #data_reagendamento = models.DateTimeField(auto_now = False, auto_now_add = False, null=True, blank=True)
     data_criacao = models.DateTimeField(auto_now = False, auto_now_add = False, default=timezone.now())
     id_paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
 
