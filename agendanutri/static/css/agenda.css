@@ -1,14 +1,23 @@
-h1, a, h2 {
+h1, a{
     font-family: 'Lobster';
     color: #c51d90;
 }
 
-p {
-    color:#7721df; 
+a {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
 }
 
-time {
-    color: #3a3837;
+h2 {
+    color: #622c9b;
+}
+
+p {
+    color:#1b1b1c; 
+}
+
+.lista_pacientes h3, a {
+    color: #1b1b1c;
 }
 
 .page-header {
@@ -27,3 +36,9 @@ time {
     text-decoration: none;
 }
 
+/* marcar_consulta */
+.messages {
+    color:#bd1010;
+    font-size: 24px;
+    font-weight: 500;
+}
