@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AgendaForm, PacienteForm
 from .models import Agenda, Paciente
 from django.contrib import messages
+from datetime import datetime
 
 
 def index(request):
@@ -54,29 +55,36 @@ def deletar_pacientes(request, pk):
 def sucesso_exclusao(request):
     return render(request, 'agendanutri/sucesso_exclusao.html', {})
 
-#PRECISO REFAZER ESTE CÓDIGO PARA NINGUEM MARCAR NO MESMO DIA E HR AS CONSULTAS
-def marcar_consulta(request):
-    if request.method == "POST":
-        form = AgendaForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            paciente_id = request.POST.get('id_paciente')
-            post.id_paciente_id = paciente_id
-            dt_consulta = form.cleaned_data['data_consulta'] 
 
-           
-            consultas = Agenda.objects.filter(data_consulta=dt_consulta, id_paciente_id=paciente_id)
-            if consultas.exists():
-                messages.error(request, "Você já têm uma consulta marcada neste horário. Por favor, escolha outro horário.")
+def marcar_consulta(request):
+    try:
+        if request.method == "POST":
+            form = AgendaForm(request.POST)
+            if form.is_valid():
+                paciente_id = form.cleaned_data['id_paciente']
+                data_consulta = form.cleaned_data['data_consulta']
+                horario_consulta_str = form.cleaned_data['horario_consulta']
+                horario_consulta = datetime.strptime(horario_consulta_str, "%H:%M").time()
+
+                consultas = Agenda.objects.filter(data_consulta=data_consulta, horario_consulta=horario_consulta)
+                if consultas.exists():
+                    messages.error(request, "Já existe uma consulta marcada neste mesmo dia e horário. Por favor, escolha outra data.")
+                else:
+                    post = form.save(commit=False)
+                    post.id_paciente = paciente_id
+                    post.data_consulta = data_consulta
+                    post.horario_consulta = horario_consulta
+                    post.save()
+                    return redirect('lista_consultas')
             else:
-                post.save()
-                return redirect('lista_consultas')
+                messages.error(request, "O formulário contém erros. Por favor, corrija-os e tente novamente.")    
         else:
-            messages.error(request, "O formulário contém erros. Por favor, corrija-os e tente novamente.")
+            form = AgendaForm()
+    except Exception as e:
+        messages.error(request, f"Ocorreu um erro inesperado: {str(e)}")
+
+    return render(request, 'agendanutri/marcar_consulta.html', {'form': form})
     
-    else:
-        form = AgendaForm()    
-    return render(request, 'agendanutri/marcar_consulta.html', {'form': form})      
     
 def lista_consultas(request):
     consultas = Agenda.objects.all()
