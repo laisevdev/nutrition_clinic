@@ -7,8 +7,8 @@
                 <h1>
                     {{consulta.id_paciente}}: Sua consulta foi Marcada com sucesso para a seguinte data abaixo: 
                 </h1>              
-                <h2>Data Consulta: {{ consulta.data_consulta }}</h2>
-                <p>Marcado em:{{ consulta.data_criacao }}</p>
+                <h2>Data Consulta: {{ consulta.data_consulta }} às {{ consulta.horario_consulta }}h.</h2>
+                <p>Marcado em: {{ consulta.data_criacao }}</p>
                 
             </main>
         {% endfor %}
